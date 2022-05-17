@@ -3,6 +3,7 @@ class User < ApplicationRecord
   VALID_NICKNAME = /\A\w+\z/
   VALID_COLOR = /\A#\h{3}{1,2}\z/
 
+  has_many :authored_questions, class_name: "Question", foreign_key: "author_id", dependent: :nullify
   has_many :questions, dependent: :delete_all
 
   has_secure_password

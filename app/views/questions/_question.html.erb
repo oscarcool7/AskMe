@@ -21,3 +21,11 @@
     </div>
   <% end %>
 </div>
+
+<div class="mt-lg text-sm text-gray">
+  <% if question.author.present? %>
+    Вопрос задал <%= link_to display_nickname(question.author), user_path(question.author) %>
+  <% else %>
+    Вопрос задал Аноним
+  <% end %>
+</div>
