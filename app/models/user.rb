@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Gravtastic
+  extend FriendlyId
 
   VALID_EMAIL = /\A[\w\d]+@[\w\d]+\.[\w]+/
   VALID_NICKNAME = /\A\w+\z/
@@ -10,6 +11,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  friendly_id :nickname, use: :slugged
   gravtastic(secure: true, filetype: :png, size: 100, default: "robohash")
 
   before_validation :downcase_nickname
