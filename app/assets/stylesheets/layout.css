@@ -1,12 +1,12 @@
 body {
-  background: #03071E;
+  background: #232a2f;
   display: flex;
   justify-content: center;
 }
 
 .wrapper {
-  max-width: 800px;
   margin: 40px;
+  max-width: 800px;
   width: 100%;
 }
 
@@ -21,7 +21,7 @@ body {
 
 .navbar {
   align-items: center;
-  background-color: #370617;
+  background-color: #cc3333;
   color: white;
   display: flex;
   justify-content: space-between;

@@ -1,11 +1,14 @@
 body {
-  color: #03071E;
-  font-family: 'Trebuchet MS', sans-serif;
+  color: #660708;
+  font-family: "Lato", sans-serif;
 }
 
-a,
+a {
+  color: #A4161A;
+}
+
 button {
-  color: #DC2F02;
+  color: #232A2F;
 }
 
 .title-lg {
@@ -18,7 +21,7 @@ button {
 }
 
 .title-sm {
-  font-size: 125;
+  font-size: 125%;
 }
 
 .text-sm {
@@ -34,11 +37,11 @@ button {
 }
 
 .text-red {
-  color: #d00000;
+  color: #ff0000;
 }
 
-.text-dark-red {
-  color: #9d0208;
+.text-dark-blue {
+  color: #060f99;
 }
 
 .text-bold {

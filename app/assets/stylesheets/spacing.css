@@ -12,7 +12,7 @@
 }
 
 .mb-sm {
-  margin-bottom: 0.6rem;
+  margin-bottom: .6rem;
 }
 
 .mb,
@@ -35,4 +35,17 @@
 
 .mr-lg {
   margin-right: 1.75em;
+}
+
+.ml-sm {
+  margin-left: .6em;
+}
+
+.ml,
+.ml-md {
+  margin-left: 1em;
+}
+
+.ml-lg {
+  margin-left: 1.75em;
 }

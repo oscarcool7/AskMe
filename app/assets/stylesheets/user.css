@@ -1,12 +1,12 @@
 .user-box {
   align-items: center;
   background-color: #f5b765;
-  color: #fff;
+  color: #f0f8ff;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .user-box a {
-  color: #fff;
+  color: #f0f8ff;
 }
