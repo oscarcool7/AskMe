@@ -1,4 +1,4 @@
-<%= form_with model: question do |form| %>
+<%= form_with model: question, data: { turbo: false } do |form| %>
   <%= form.hidden_field :user_id %>
 
   <p><%= form.label :body, "Текст вопроса" %></p>

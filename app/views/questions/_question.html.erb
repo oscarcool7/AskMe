@@ -3,7 +3,7 @@
 </div>
 
 <% if question.answer.present? %>
-  <div class="mb-sm text-dark-red">
+  <div class="mb-sm text-dark-blue">
     <%= question.answer %>
   </div>
 <% end %>
@@ -14,7 +14,6 @@
   <% if current_user == question.user %>
     <div>
       <% edit_icon = (question.answer.present? ? "pencil" : "reply") %>
-
       <%= link_to fa_icon(edit_icon), edit_question_path(question), title: "Изменить вопрос", class: "mr-sm" %>
       <%= button_to fa_icon("trash-o"), question_path(question), method: :delete,
       form: { data: { turbo_confirm: "Точно удалить вопрос?" } }, title: "Удалить вопрос" %>

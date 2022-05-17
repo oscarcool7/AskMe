@@ -1,12 +1,20 @@
 class QuestionsController < ApplicationController
-  before_action :ensure_current_user, only: %i[destroy edit update]
-  before_action :set_question, only: %i[edit destroy show update]
+  before_action :ensure_current_user, only: %i[edit destroy update]
+  before_action :set_question_for_current_user, only: %i[edit destroy update]
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
-    question = Question.create(question_params)
 
-    redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
+    @question = Question.new(question_params)
+    @question.author = current_user
+
+    if @question.save
+      redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
+    else
+      flash.now[:alert] = "Вы неправильно заполнили поле вопроса!"
+
+      render "new"
+    end
   end
 
   def edit
@@ -20,8 +28,8 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @question = Question.new
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc).last(10)
+    @users = User.order(created_at: :desc).last(10)
   end
 
   def new
@@ -46,7 +54,7 @@ class QuestionsController < ApplicationController
     redirect_with_alert unless current_user.present?
   end
 
-  def set_question
-    @question = Question.find(params[:id])
+  def set_question_for_current_user
+    @question = current_user.questions.find(params[:id])
   end
 end

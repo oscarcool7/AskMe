@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Gravtastic
+
   VALID_EMAIL = /\A[\w\d]+@[\w\d]+\.[\w]+/
   VALID_NICKNAME = /\A\w+\z/
   VALID_COLOR = /\A#\h{3}{1,2}\z/
@@ -7,6 +9,8 @@ class User < ApplicationRecord
   has_many :questions, dependent: :delete_all
 
   has_secure_password
+
+  gravtastic(secure: true, filetype: :png, size: 100, default: "robohash")
 
   before_validation :downcase_nickname
 

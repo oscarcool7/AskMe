@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[destroy edit show update]
-  before_action :authorize_user, only: %i[destroy edit update]
+  before_action :set_user, only: %i[edit destroy show update]
+  before_action :authorize_user, only: %i[edit destroy update]
 
   def create
     @user = User.new(user_params)
