@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[destroy edit show update]
+  before_action :authorize_user, only: %i[destroy edit update]
+
   def create
     @user = User.new(user_params)
 
@@ -14,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     session.delete(:user_id)
@@ -23,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def new
@@ -31,9 +32,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def update
-    @user = User.find(params[:id])
+  def show
+    @questions = @user.questions
+    @question = Question.new(user: @user)
+  end
 
+  def update
     if @user.update(user_params)
       redirect_to root_path, notice: "Данные пользователя обновлены"
     else
@@ -44,6 +48,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    redirect_with_alert unless current_user == @user
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :nickname, :email, :password, :password_confirmation, :navbar_color)

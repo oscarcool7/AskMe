@@ -3,9 +3,11 @@ class User < ApplicationRecord
   VALID_NICKNAME = /\A\w+\z/
   VALID_COLOR = /\A#\h{3}{1,2}\z/
 
+  has_many :questions, dependent: :delete_all
+
   has_secure_password
 
-  before_save :downcase_nickname
+  before_validation :downcase_nickname
 
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL }
   validates :navbar_color, format: { with: VALID_COLOR }
