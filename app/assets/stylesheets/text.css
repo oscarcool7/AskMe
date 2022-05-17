@@ -29,6 +29,10 @@ button {
   color: #a0a0a0;
 }
 
+.text-light-grey {
+  color: #c0c0c0;
+}
+
 .text-red {
   color: #d00000;
 }
@@ -39,4 +43,8 @@ button {
 
 .text-bold {
   font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
 }
