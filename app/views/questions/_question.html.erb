@@ -28,3 +28,9 @@
     Вопрос задал Аноним
   <% end %>
 </div>
+
+<div class="mt">
+  <% question.hashtags.each do |hashtag| %>
+    <%= link_to "#{hashtag.name}", hashtag_path(hashtag) %>
+  <% end %>
+</div>

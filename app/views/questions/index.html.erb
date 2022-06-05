@@ -8,6 +8,16 @@
   </div>
 </div>
 
+<% if @hashtags.present? %>
+  <div class="container mt-sm">
+    <h2 class="title-lg mb">Все хэштеги</h2>
+
+    <% @hashtags.each do |hashtag| %>
+      <%= link_to hashtag.name, hashtag_path(hashtag) %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="container mt-sm">
   <h2 class="title-lg">
     <%= inclination(@questions.count, "Последний", "Последние", "Последние") %>
