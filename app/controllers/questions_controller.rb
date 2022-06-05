@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
 
-    @question = fill_question_with_hashtags_from_body!(@question)
+    @question = helpers.fill_question_with_hashtags!(question_params[:body], @question)
 
     if check_captcha(@question) && @question.save
       redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
@@ -46,7 +46,7 @@ class QuestionsController < ApplicationController
 
   def update
     question_params = params.require(:question).permit(:body, :answer)
-    @question = fill_question_with_hashtags_from_answer!(question_params[:answer], @question)
+    @question = helpers.fill_question_with_hashtags!(question_params[:answer], @question)
     @question.update(question_params)
 
     redirect_to user_path(@question.user), notice: "Сохранили вопрос!"
@@ -62,22 +62,22 @@ class QuestionsController < ApplicationController
     redirect_with_alert unless current_user.present?
   end
 
-  def fill_question_with_hashtags_from_body!(question)
-    body = question.body
-    matches = body.scan(/#[[:word:]]+/).flatten
-    hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
-    question.hashtags << hashtags.uniq
+  # def fill_question_with_hashtags_from_body!(question)
+  #   body = question.body
+  #   matches = body.scan(/#[[:word:]]+/).flatten
+  #   hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
+  #   question.hashtags << hashtags.uniq
 
-    question
-  end
+  #   question
+  # end
 
-  def fill_question_with_hashtags_from_answer!(answer, question)
-    matches = answer.scan(/#[[:word:]]+/).flatten
-    hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
-    question.hashtags << hashtags.uniq
+  # def fill_question_with_hashtags_from_answer!(answer, question)
+  #   matches = answer.scan(/#[[:word:]]+/).flatten
+  #   hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
+  #   question.hashtags << hashtags.uniq
 
-    question
-  end
+  #   question
+  # end
 
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
