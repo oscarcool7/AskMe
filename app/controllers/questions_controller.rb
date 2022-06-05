@@ -62,23 +62,6 @@ class QuestionsController < ApplicationController
     redirect_with_alert unless current_user.present?
   end
 
-  # def fill_question_with_hashtags_from_body!(question)
-  #   body = question.body
-  #   matches = body.scan(/#[[:word:]]+/).flatten
-  #   hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
-  #   question.hashtags << hashtags.uniq
-
-  #   question
-  # end
-
-  # def fill_question_with_hashtags_from_answer!(answer, question)
-  #   matches = answer.scan(/#[[:word:]]+/).flatten
-  #   hashtags = matches.map { |m| Hashtag.find_or_create_by!(name: m.downcase) }
-  #   question.hashtags << hashtags.uniq
-
-  #   question
-  # end
-
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
   end
