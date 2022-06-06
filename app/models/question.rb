@@ -20,6 +20,6 @@ class Question < ApplicationRecord
   end
 
   def update_hashtags
-    self.hashtags = question_hashtags.map { |tag| Hashtag.create_or_find_by(name: tag) }
+    self.hashtags = question_hashtags.map { |tag| Hashtag.find_or_create_by(name: tag) }
   end
 end
