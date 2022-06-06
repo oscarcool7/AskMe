@@ -4,5 +4,22 @@ class Question < ApplicationRecord
   has_many :question_with_hashtags, dependent: :destroy
   has_many :hashtags, through: :question_with_hashtags
 
+  after_save_commit :update_hashtags
+
   validates :body, presence: true, length: { maximum: 280 }
+
+  private
+
+  def scan_hashtags(text)
+    text.scan(/#[[:word:]]+/)
+  end
+
+  def question_hashtags
+    question_text = "#{body} #{answer}"
+    scan_hashtags(question_text.downcase).uniq
+  end
+
+  def update_hashtags
+    self.hashtags = question_hashtags.map { |tag| Hashtag.create_or_find_by(name: tag) }
+  end
 end
