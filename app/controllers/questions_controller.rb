@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @hashtags = Hashtag.all.limit(10)
+    @hashtags = Hashtag.with_linked_questions
     @questions = Question.order(created_at: :desc).last(10)
     @users = User.order(created_at: :desc).last(10)
   end

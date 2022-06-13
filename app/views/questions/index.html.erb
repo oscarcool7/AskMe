@@ -13,9 +13,7 @@
     <h2 class="title-lg mb">Все хэштеги</h2>
 
     <% @hashtags.each do |hashtag| %>
-      <% if hashtag.questions.any? %>
-        <%= link_to hashtag.name, hashtag_path(hashtag) %>
-      <% end %>
+      <%= link_to hashtag.name, hashtag_path(hashtag) %>
     <% end %>
   </div>
 <% end %>
